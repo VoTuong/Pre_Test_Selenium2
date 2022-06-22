@@ -13,7 +13,7 @@ public class DriverHelper {
         options.addArguments("--start-maximized");
         options.addArguments("--disable-features=EnableEphemeralFlashPermission");
         options.addArguments("--disable-infobars");
-        options.addArguments("−−lang=en-US");
+        options.addArguments("−−lang=en-VN");
         Constants.DRIVER = new ChromeDriver(options);
     }
 
