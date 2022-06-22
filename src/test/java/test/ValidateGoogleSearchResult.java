@@ -33,13 +33,13 @@ public class ValidateGoogleSearchResult extends TestBase {
         System.out.println("Step 5: Verify the Videos title");
         Assert.assertTrue(ggPage.isVideosContainsText(txtSearch), "The Video sections should contains \"" + txtSearch + "\" text");
 
-        //Step 6: Verify the People also ask titles
-        System.out.println("Step 5: Verify the People also ask titles");
-        Assert.assertTrue(ggPage.isPeopleAlsoAskContainsText(txtSearch), "The People also ask sections should contains \"" + txtSearch + "\" text");
-
-        //Step 7: Verify the Top Stories
+        //Step 6: Verify the Top Stories
         System.out.println("Step 6: Verify the Top Stories");
         Assert.assertTrue(ggPage.isTopStoriesContainsText(txtSearch), "The special Top Stories sections should contains \"" + txtSearch + "\" text");
+
+        //Step 7: Verify the People also ask titles
+        System.out.println("Step 7: Verify the People also ask titles");
+        Assert.assertTrue(ggPage.isPeopleAlsoAskContainsText(txtSearch), "The People also ask sections should contains \"" + txtSearch + "\" text");
 
     }
 }
