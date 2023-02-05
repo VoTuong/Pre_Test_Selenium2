@@ -5,7 +5,7 @@
         <parameter name="browser" value=""/>
         <classes>
             <class name="test.ValidateGoogleSearchResult"/>
-<!--            <class name="test.YouTubeResultFromGoogleSearchValidation_Test"/>-->
+            <class name="test.YouTubeResultFromGoogleSearchValidation_Test"/>
         </classes>
     </test>
 </suite>
