@@ -1,6 +1,7 @@
 package com.pretestsele2.pages;
 
 import com.pretestsele2.control.Element;
+import extentreports.ExtentLogger;
 
 public class YoutubePage {
 
@@ -12,18 +13,18 @@ public class YoutubePage {
     private final Element playButton = new Element("//button[@class='ytp-play-button ytp-button']");
 
     private final Element skipAdsButton = new Element("//button[@class='ytp-ad-skip-button ytp-button']");
-    private final Element videoTitle = new Element("//h1[@class='title style-scope ytd-video-primary-info-renderer']");
+    private final Element videoTitle = new Element("//*[@id='title']/h1/yt-formatted-string");
 
     /**
      * YouTube Page functions
      **/
 
     public String getVideoTitle(){
+        videoTitle.waitForDisplay();
         return videoTitle.getText();
     }
 
     private void clickPlayButton() {
-
         playButton.click();
     }
 
@@ -32,6 +33,7 @@ public class YoutubePage {
     }
 
     public boolean isVideoPlaying() {
+        playButton.waitForDisplay();
         return playButton.getAttribute("title").contains("Pause");
     }
 
@@ -43,22 +45,16 @@ public class YoutubePage {
         if (isVideoPause()) {
             clickPlayButton();
         }
+        ExtentLogger.info("Video Paused");
     }
 
     public void playVideo() {
-        if (skipAdsButton.isVisible()==true){
-            if (isVideoPlaying()) {
-                clickPlayButton();
-            }
-            clickPlayButton();
-        }else {
-            if (isVideoPlaying()) {
-                clickPlayButton();
-            }
+        if (isVideoPause()) {
             clickPlayButton();
         }
+        ExtentLogger.info("Video Played");
     }
-//
+
 //    public void pauseVideoAfter(long second) throws InterruptedException {
 //        playVideo();
 //        Thread.sleep(second*1000);

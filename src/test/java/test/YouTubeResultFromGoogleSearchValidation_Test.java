@@ -25,16 +25,18 @@ public class YouTubeResultFromGoogleSearchValidation_Test extends BaseTest {
         ggPage.searchWithSearchKey(txtSearch);
 
         ExtentLogger.info("Step 2: Open the first video result");
-        System.out.println(ggPage.getFirstVideoTitle(txtSearch));
+        firstVideoTitle = ggPage.getFirstVideoTitle(txtSearch);
+        ExtentLogger.info("The first video has title: " + firstVideoTitle);
         ytbPage = ggPage.openFirstVideo();
 
-        ExtentLogger.info("Step 2: Click play button");
+        ExtentLogger.info("Step 3: Click play button");
         ytbPage.playVideo();
 
-        System.out.println(ytbPage.getVideoTitle());
+        ExtentLogger.info("Step 4: Check the video title is same to Google result");
+        Assert.assertEquals(firstVideoTitle,ytbPage.getVideoTitle(),"The video title should be same to Google result");
 
-//        ExtentLogger.info("Step : Checking the video is played");
-//        Assert.assertTrue(ytbPage.isVideoPlay(),"The video is paused");
+        ExtentLogger.info("Step 5: Checking the video is playing");
+        Assert.assertTrue(ytbPage.isVideoPlaying(),"The video is paused");
 
 //        System.out.println("I pause the video after 10 seconds");
 //        basePage.clickPlayButtonAfterTime();
