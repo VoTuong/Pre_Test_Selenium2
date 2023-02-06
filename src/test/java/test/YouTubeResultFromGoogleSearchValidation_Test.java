@@ -1,51 +1,41 @@
 package test;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import base.BaseTest;
+import com.pretestsele2.pages.GoogleSearchPage;
+import com.pretestsele2.pages.YoutubePage;
+import extentreports.ExtentLogger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.pretestsele2.pages.BasePage;
 
-public class YouTubeResultFromGoogleSearchValidation_Test {
-    BasePage basePage = new BasePage();
+public class YouTubeResultFromGoogleSearchValidation_Test extends BaseTest {
+
     private String firstVideoTitle = "";
     private String txtSearch = "The Beatles";
     private String sections = "Video";
 
-    @BeforeMethod
-    @Parameters("browser")
-    public void setUpBrowser(String browser) {
-//        DriverHelper.openChromeBrowser();
-    }
+    GoogleSearchPage ggPage = new GoogleSearchPage();
+    YoutubePage ytbPage;
 
-    @Test
-    public void googleTest() {
-//        System.out.println("I navigate to the Google page");
-//        basePage.navigateToGoogle();
-//
-//        System.out.println("I search for " + txtSearch);
-//        basePage.inputSearchInput(txtSearch);
-//
-//        System.out.println("The main result should contains " + txtSearch + " text");
-//        Assert.assertEquals(basePage.getMainResultText(), txtSearch,
-//                "The main result should contains " + txtSearch + " text");
-//
-//        System.out.println("The special sections " + sections + " should contains " + txtSearch + " text");
-//        Assert.assertTrue(basePage.isVideoText(txtSearch),
-//                "The special sections " + sections + " should contains " + txtSearch + " text");
-//
-//        System.out.println("The text \"" + txtSearch + "\" remained on the search box");
-//        Assert.assertEquals(basePage.getSearchInputText(), txtSearch.toLowerCase(),
-//                "The search box should contains query text");
-//
-//        firstVideoTitle = basePage.getFirstVideoText();
-//
-//        System.out.println("I open the first video");
-//        basePage.openFistVideo();
-//
-//        System.out.println("I click play button");
-//        basePage.clickPlayButton();
-//
+    @Test(description = "Validate YouTube result from Google search")
+    public void youtubeTest() {
+
+        //Step 1: Search with keu word
+        ExtentLogger.info("Step 1: Search with keu word");
+        ggPage.searchWithSearchKey(txtSearch);
+
+        ExtentLogger.info("Step 2: Open the first video result");
+        System.out.println(ggPage.getFirstVideoTitle(txtSearch));
+        ytbPage = ggPage.openFirstVideo();
+
+        ExtentLogger.info("Step 2: Click play button");
+        ytbPage.playVideo();
+
+        System.out.println(ytbPage.getVideoTitle());
+
+//        ExtentLogger.info("Step : Checking the video is played");
+//        Assert.assertTrue(ytbPage.isVideoPlay(),"The video is paused");
+
 //        System.out.println("I pause the video after 10 seconds");
 //        basePage.clickPlayButtonAfterTime();
 //
@@ -58,8 +48,4 @@ public class YouTubeResultFromGoogleSearchValidation_Test {
 //                "The video should be played or paused accordingly");
     }
 
-    @AfterMethod
-    public void closeBrowser() {
-//        DriverHelper.quitBrowser();
-    }
 }

@@ -20,7 +20,7 @@ public class ChromeDriver extends DriverManager {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-infobars");
         chromeOptions.addArguments("--disable-notifications");
-        chromeOptions.addArguments("headless=new");
+//        chromeOptions.addArguments("headless=new");
 
         return chromeOptions;
     }

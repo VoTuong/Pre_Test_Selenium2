@@ -9,8 +9,6 @@ public class Constants {
 
     public static final String VALID_SPECIAL_CHARACTERS = "@";
     public static final String INVALID_SPECIAL_CHARACTERS = "#$%";
-
-    public static final String TEST_REPOSITORY = "TestRepository";
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
     public static final String PROPERTIES_FILE_PATH_ROOT = "src/test/resources/properties/configs.properties";
     public static final String PROJECT_PATH = Helpers.getCurrentDir();
@@ -19,7 +17,7 @@ public class Constants {
     public static final String OVERVIEW_PAGE = "Overview";
     public static final String INVALID_ACCOUNT_ERROR_MESSAGE = "Username or password is invalid";
 
-    public static final String URL = PropertiesHelpers.getValue("URL_LOGIN");
+    public static final String URL = PropertiesHelpers.getValue("URL");
     public static final String REMOTE_URL = PropertiesHelpers.getValue("REMOTE_URL");
     public static final String REMOTE_PORT = PropertiesHelpers.getValue("REMOTE_PORT");
     public static final String REPORT_TITLE = PropertiesHelpers.getValue("REPORT_TITLE");

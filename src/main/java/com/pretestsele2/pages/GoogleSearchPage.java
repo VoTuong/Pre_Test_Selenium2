@@ -8,30 +8,30 @@ import java.util.List;
 
 public class GoogleSearchPage {
     /**
-     * Result Page
+     * Google Page locate
      **/
-    /* Google Page locate */
     private final Element searchInput = new Element("//input[@name='q']");
 
     private final Element searchLanguageIsEng = new Element("//*[@id='SIvCob']/a[contains(text(),'English')]");
 
     private final Element mainResult = new Element("//*[@id='rcnt']//div[@data-attrid='title']/span");
 
-    private final Element videosSections = new Element("//*[@id='kp-wp-tab-overview']//video-voyager");
+    private final Element videosSections = new Element("//*[@id='kp-wp-tab-overview']//video-voyager//div[@class='uOId3b']//span");
 
-    private final Element peopleAlsoAskSections = new Element("//div[contains(@class,'related-question-pair')]//div[@class='wWOJcd']//span");
+    private final Element peopleAlsoAskSections = new Element("//div[contains(@class,'related-question-pair')]//div[@aria-hidden='true']//span");
 
     private final Element topStoriesSections = new Element("//div[@class='ULSxyf']//div[@class='MkXWrd']");
 
     /**
-     * Result Page functions
+     * Google Page functions
      **/
-
-    public List<String> listVideosText() {
+    public List<String> listVideosText(String searchKey) {
         List<String> listVideosTitle = new ArrayList<>();
         for (WebElement videos : videosSections()) {
             String title = videos.getText();
-            listVideosTitle.add(title);
+            if(title.contains(searchKey)){
+                listVideosTitle.add(title);
+            }
         }
         return listVideosTitle;
     }
@@ -88,7 +88,7 @@ public class GoogleSearchPage {
     }
 
     public boolean isVideosContainsText(String searchKey) {
-        return listVideosText().stream().anyMatch(str -> str.trim().contains(searchKey));
+        return listVideosText(searchKey).stream().anyMatch(str -> str.trim().contains(searchKey));
     }
 
     public boolean isPeopleAlsoAskContainsText(String searchKey) {
@@ -99,13 +99,14 @@ public class GoogleSearchPage {
         return listTopStoriesText().stream().anyMatch(str -> str.trim().contains(searchKey));
     }
 
-//    public String getFirstVideoTitle(String _searchKey) {
-//        return listVideosTitleText(_searchKey).get(0);
-//    }
-//
-//    public void openFirstVideo() {
-//        videosSection().get(0).click();
-//    }
+    public String getFirstVideoTitle(String searchKey) {
+        return listVideosText(searchKey).get(0);
+    }
+
+    public YoutubePage openFirstVideo() {
+        videosSections()[0].click();
+        return new YoutubePage();
+    }
 
 
 }
